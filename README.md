@@ -22,7 +22,7 @@ $ npm install koa2-wechat-oauth
 引入OAuth并实例化
 
 ```js
-var OAuth = require('co-wechat-oauth');
+var OAuth = require('koa2-wechat-oauth');
 var client = new OAuth('your appid', 'your secret');
 ```
 
@@ -58,7 +58,7 @@ var url = client.getAuthorizeURLForWebsite('redirectUrl');
 用户点击上步生成的URL后会被重定向到上步设置的 `redirectUrl`，并且会带有`code`参数，我们可以使用这个`code`换取`access_token`和用户的`openid`
 
 ```js
-var token = yield client.getAccessToken('code');
+var token = await client.getAccessToken('code');
 var accessToken = token.data.access_token;
 var openid = token.data.openid;
 ```
@@ -67,34 +67,8 @@ var openid = token.data.openid;
 如果我们生成引导用户点击的URL中`scope`参数值为`snsapi_userinfo`，接下来我们就可以使用`openid`换取用户详细信息（必须在getAccessToken方法执行完成之后）
 
 ```js
-var userInfo = yield client.getUser('openid');
+var userInfo = await client.getUser('openid');
 ```
-
-## 捐赠
-如果您觉得Wechat OAuth对您有帮助，欢迎请作者一杯咖啡
-
-![捐赠wechat](https://cloud.githubusercontent.com/assets/327019/2941591/2b9e5e58-d9a7-11e3-9e80-c25aba0a48a1.png)
-
-或者[![](http://img.shields.io/gratipay/JacksonTian.svg)](https://www.gittip.com/JacksonTian/)
 
 ## 交流群
 QQ群：157964097，使用疑问，开发，贡献代码请加群。
-
-## Contributors
-感谢以下贡献者：
-
-```
-$ git summary
-
- project  : co-wechat-oauth
- repo age : 55 minutes
- active   : 1 days
- commits  : 2
- files    : 7
- authors  :
-     2  Jackson Tian  100.0%
-
-```
-
-## License
-The MIT license.
