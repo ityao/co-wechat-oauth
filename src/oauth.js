@@ -75,7 +75,7 @@ OAuth.prototype.setOpts = function (opts) {
  * @param {String} url 路径
  * @param {Object} opts urllib选项
  */
-OAuth.prototype.request = async (url, opts) => {
+OAuth.prototype.request = async function(url, opts) {
   var options = {};
   extend(options, this.defaults);
   opts || (opts = {});
@@ -151,7 +151,7 @@ OAuth.prototype.getAuthorizeURLForWebsite = function (redirect, state, scope) {
 /*!
  * 处理token，更新过期时间
  */
-OAuth.prototype.processToken = async (data) => {
+OAuth.prototype.processToken = async function (data) {
   data.create_at = new Date().getTime();
   // 存储token
   await this.saveToken(data.openid, data);
@@ -183,7 +183,7 @@ OAuth.prototype.processToken = async (data) => {
  * ```
  * @param {String} code 授权获取到的code
  */
-OAuth.prototype.getAccessToken = async(code) => {
+OAuth.prototype.getAccessToken = async function(code) {
   var url = 'https://api.weixin.qq.com/sns/oauth2/access_token';
   var info = {
     appid: this.appid,
@@ -225,7 +225,7 @@ OAuth.prototype.getAccessToken = async(code) => {
  * ```
  * @param {String} refreshToken refreshToken
  */
-OAuth.prototype.refreshAccessToken = async(refreshToken) => {
+OAuth.prototype.refreshAccessToken = async function (refreshToken) {
   var url = 'https://api.weixin.qq.com/sns/oauth2/refresh_token';
   var info = {
     appid: this.appid,
@@ -295,7 +295,7 @@ OAuth.prototype._getUser = function (options, accessToken) {
  * ```
  * @param {Object|String} options 传入openid或者参见Options
  */
-OAuth.prototype.getUser = async(options) =>{
+OAuth.prototype.getUser = async function (options){
   if (typeof options !== 'object') {
     options = {
       openid: options
@@ -321,7 +321,7 @@ OAuth.prototype.getUser = async(options) =>{
   return await this._getUser(options, accessToken);
 };
 
-OAuth.prototype._verifyToken  = async (openid, accessToken) => {
+OAuth.prototype._verifyToken  = async function(openid, accessToken) {
   var url = 'https://api.weixin.qq.com/sns/auth';
   var info = {
     access_token: accessToken,
@@ -362,7 +362,7 @@ OAuth.prototype._verifyToken  = async (openid, accessToken) => {
  * ```
  * @param {String} code 授权获取到的code
  */
-OAuth.prototype.getUserByCode = async (code) => {
+OAuth.prototype.getUserByCode = async function(code) {
   var token = await this.getAccessToken(code);
   return await this.getUser(token.data.openid);
 };
