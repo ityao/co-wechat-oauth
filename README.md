@@ -1,13 +1,6 @@
-co-wechat-oauth
+koa2-wechat-oauth
 ===============
-Wechat OAuth for ES6。微信公共平台OAuth接口消息接口服务中间件与API SDK
-
-## 模块状态
-
-- [![NPM version](https://badge.fury.io/js/co-wechat-oauth.png)](http://badge.fury.io/js/co-wechat-oauth)
-- [![Build Status](https://travis-ci.org/node-webot/co-wechat-oauth.png?branch=master)](https://travis-ci.org/node-webot/co-wechat-oauth)
-- [![Dependencies Status](https://david-dm.org/node-webot/co-wechat-oauth.png)](https://david-dm.org/node-webot/co-wechat-oauth)
-- [![Coverage Status](https://coveralls.io/repos/node-webot/co-wechat-oauth/badge.png)](https://coveralls.io/r/node-webot/co-wechat-oauth)
+Wechat OAuth for async/await (koa2)。微信公共平台OAuth接口消息接口服务中间件与API SDK
 
 ## 功能列表
 - OAuth授权
@@ -20,7 +13,7 @@ OAuth2.0网页授权，使用此接口须通过微信认证，如果用户在微
 ## Installation
 
 ```sh
-$ npm install co-wechat-oauth
+$ npm install koa2-wechat-oauth
 ```
 
 ## Usage
@@ -37,15 +30,15 @@ var client = new OAuth('your appid', 'your secret');
 当多进程时，token需要全局维护，以下为保存token的接口。
 
 ```js
-var oauthApi = new OAuth('appid', 'secret', function* (openid) {
+var oauthApi = new OAuth('appid', 'secret', async (openid) => {
   // 传入一个根据openid获取对应的全局token的方法
-  var txt = yield fs.readFile(openid +':access_token.txt', 'utf8');
+  var txt = await fs.readFile(openid +':access_token.txt', 'utf8');
   return JSON.parse(txt);
-}, function* (openid, token) {
+}, async (openid, token) => {
   // 请将token存储到全局，跨进程、跨机器级别的全局，比如写到数据库、redis等
   // 这样才能在cluster模式及多机情况下使用，以下为写入到文件的示例
   // 持久化时请注意，每个openid都对应一个唯一的token!
-  yield fs.writeFile(openid + ':access_token.txt', JSON.stringify(token));
+  await fs.writeFile(openid + ':access_token.txt', JSON.stringify(token));
 });
 ```
 
