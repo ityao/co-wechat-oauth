@@ -75,7 +75,7 @@ OAuth.prototype.setOpts = function (opts) {
  * @param {String} url 路径
  * @param {Object} opts urllib选项
  */
-OAuth.prototype.request = async function (url, opts) {
+OAuth.prototype.request = async (url, opts) => {
   var options = {};
   extend(options, this.defaults);
   opts || (opts = {});
@@ -151,7 +151,7 @@ OAuth.prototype.getAuthorizeURLForWebsite = function (redirect, state, scope) {
 /*!
  * 处理token，更新过期时间
  */
-OAuth.prototype.processToken = async function (data) {
+OAuth.prototype.processToken = async (data) => {
   data.create_at = new Date().getTime();
   // 存储token
   await this.saveToken(data.openid, data);
