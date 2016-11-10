@@ -1,6 +1,6 @@
 {
   "name": "koa2-wechat-oauth",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "koa2版微信公共平台OAuth",
   "main": "index.js",
   "scripts": {
