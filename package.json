@@ -1,23 +1,29 @@
 {
-  "name": "co-wechat-oauth",
+  "name": "koa2-wechat-oauth",
   "version": "1.0.1",
-  "description": "Co版微信公共平台OAuth",
+  "description": "koa2版微信公共平台OAuth",
   "main": "index.js",
   "scripts": {
-    "test": "make test-all"
+    "compile": "babel -d lib/ src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/node-webot/co-wechat-oauth.git"
+    "url": "git://github.com/ityao/koa2-wechat-oauth"
   },
   "keywords": [
     "weixin",
-    "wechat"
+    "wechat",
+    "ouath",
+    "koa2"
   ],
   "dependencies": {
     "urllib": "2.4.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-stage-3": "^6.11.0",
     "supertest": "*",
     "mocha": "*",
     "expect.js": "*",
@@ -27,7 +33,7 @@
     "rewire": "*",
     "istanbul": "*"
   },
-  "author": "Jackson Tian",
+  "author": "Silver Lao",
   "license": "MIT",
   "readmeFilename": "README.md",
   "directories": {
