@@ -92,7 +92,7 @@ OAuth.prototype.request = async function(url, opts) {
 
   var result;
   try {
-    result = await urllib.requestThunk(url, options);
+    result = await urllib.request(url, options);
   } catch (err) {
     err.name = 'WeChatAPI' + err.name;
     throw err;
